@@ -9,7 +9,7 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Result result = new ML.Result(); //instanceamos la clase result 
-            ML.Producto producto = new ML.Producto(); 
+            ML.Producto producto = new ML.Producto();
             producto.Departamento = new ML.Departamento();
 
             ML.Result resultDepartamento = BL.Departamento.GetAll();
@@ -34,7 +34,7 @@ namespace PL.Controllers
         {
 
             ML.Result result = new ML.Result(); //instanceamos la clase result 
-           // producto.Departamento = new ML.Departamento();
+                                                // producto.Departamento = new ML.Departamento();
 
             ML.Result resultDepartamento = BL.Departamento.GetAll();
             result = BL.Producto.GetAll(producto); //llamamos el metodo
@@ -74,7 +74,7 @@ namespace PL.Controllers
             return View(producto);
         }
 
-            [HttpPost]
+        [HttpPost]
         public ActionResult Form(ML.Producto producto)
         {
 
@@ -97,7 +97,7 @@ namespace PL.Controllers
             else
             {
                 //Update
-               // result = BL.Usuario.Update(producto);
+                // result = BL.Usuario.Update(producto);
 
                 if (result.Correct)
                 {
@@ -110,6 +110,17 @@ namespace PL.Controllers
             }
 
             return PartialView("Modal");
+        }
+
+        public static byte[] ConvertToBytes(IFormFile imagen)
+        {
+
+            using var fileStream = imagen.OpenReadStream();
+
+            byte[] bytes = new byte[fileStream.Length];
+            fileStream.Read(bytes, 0, (int)fileStream.Length);
+
+            return bytes;
         }
     }
 }

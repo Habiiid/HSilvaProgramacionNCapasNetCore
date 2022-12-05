@@ -72,6 +72,8 @@
                         <th> Area </th> 
 
                         <th> Descripcion </th> 
+                       
+                        <th> Imagen </th> 
 
                         <th> Eliminar </th>
 
@@ -87,7 +89,7 @@
 
                         <td> @producto.Nombre </td>
 
-                        <td> @producto.PrecioUnitario </td>
+                        <td> $ @producto.PrecioUnitario </td>
 
                         <td> @producto.Stock </td>
 
@@ -106,6 +108,16 @@
                         <td> @producto.Departamento.Area.Nombre </td>
 
                         <td> @producto.Descripcion </td>
+                        
+                        <td>  @if (producto.Imagen != null)
+                            {
+                                <img id="Img" src="data:image/*;base64,@producto.Imagen" style="width:150px ; height:150px" />
+                            }
+                            else
+                            {
+                                <img id="Img" src="~/Imagen/SinProducto.jpg" style="width:150px ; height:150px" />
+                            }
+                        </td>    
 
                         <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"> <i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
                     </tr>

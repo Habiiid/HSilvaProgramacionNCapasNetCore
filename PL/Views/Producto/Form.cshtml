@@ -85,6 +85,33 @@
                     </div>
               </div>
             </div>
+
+             <div class="container">
+             <div class="row">
+             <div class="col-md-6">
+
+               @Html.LabelFor(model=> model.Imagen)
+
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                <input id="IFImagen" type='file' class="form-control" name="IFImagen" onchange="validateFile(this), readURL(this);  " />
+                            </div> 
+
+                  @if (Model.Imagen != null)
+                  {
+                  <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:150px ; height:150px" />
+
+                  }
+                  else
+                  {
+                  <img id="Img" src="~/Imagen/SinProducto.jpg" style="width:150px ; height:150px" />
+                  }
+
+                  @Html.ValidationMessageFor(model => model.Imagen)
+                  </div>
+                  @Html.HiddenFor(model => model.Imagen)
+             </div>
+             </div>
        
              
              <div class="container">
@@ -106,3 +133,35 @@
     </div>
 </div>
 </div>
+
+@section Scripts
+{
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript"></script>
+
+<script>
+function validateFile()
+                {
+                    var allowedExtension = ['jpeg', 'jpg'];
+                    var fileExtension = document.getElementById('fuImage').value.split('.').pop().toLowerCase();
+                    var isValidFile = false;
+                        for(var index in allowedExtension) {
+                            if(fileExtension === allowedExtension[index]) {
+                                isValidFile = true;
+                                break;
+                            }
+                        }
+                        if(!isValidFile) {
+                            alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                            document.getElementById('fuImage').value = ""
+                        }
+                        return isValidFile;
+                }
+
+     </script>             
+   }

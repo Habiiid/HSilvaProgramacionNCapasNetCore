@@ -1,0 +1,122 @@
+﻿@model ML.VentaProducto
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center"> Productos en Carrito </h1>
+@if(Context.Session.GetString("Producto") == null){
+      <h2>El Carrito esta vacio</h2>
+
+    <div class="row">
+    <div class="col-md-12">
+        <h5>Vuelve para agregar productos a tu carrito</h5>
+        <hr />
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+        <div class="col-auto ms-auto">
+            @Html.ActionLink("Ir a Productos", "VentaProducto", "VentaProducto", htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
+</div>
+}
+else
+{
+   <div class="container">
+    <div class="row">
+
+        @using (Html.BeginForm("CartPost","VentaProducto", FormMethod.Post, new { enctype = "multipart/form-data"}))
+        {
+            <div class="container">
+                <div class="row-justify-content-star">
+
+                    <div class="col-auto ms-auto">
+                         @Html.ActionLink("Seguir Comprando", "VentaProducto", "VentaProducto", htmlAttributes: new { @class = "btn btn-primary" })
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+    </div> 
+
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-responsive" id="tblCarrito">
+                <thead>
+                    <tr>
+                        <th> Nombre </th>
+                        <th> Precio </th>
+                        <th> Stock </th>
+                        <td style="display:none;"> IdProveedor </td>
+                        <th> Proveedor </th>
+                        <th> Telefono </th>
+                        <td style="display:none;"> IdDepartamento </td>
+                        <th> Departamento </th>
+                        <td style="display:none;"> IdArea </td>
+                        <th> Area </th>
+                        <th> Descripcion </th>
+                        <th> Imagen </th>
+                        <th> Cantidad </th>
+                        <th> Eliminar </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                         
+                           @* @foreach (ML.VentaProducto ventaProducto in Model.VentasProductos)
+                            {
+                               <td> @ventaProducto.Nombre </td>
+                               <td> @ventaProducto.PrecioUnitario </td>
+                               <td> @ventaProducto.Stock </td>
+                            }*@
+
+           
+           </tr>
+           @* <td style ="display :none;">@producto.VentaProducto.Producto.IdProducto </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Nombre </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.PrecioUnitario </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Stock </td>
+           <td style ="display :none;"> @producto.Proveedor.IdProveedor </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Proveedor.Nombre </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Proveedor.Telefono </td>
+           <td style ="display :none;"> @producto.Departamento.IdDepartamento </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Departamento.Nombre </td>
+           <td sstyle ="display :none;"> @producto.Departamento.Area.IdArea </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Departamento.Area.Nombre </td>
+           <td style ="text-align: center; vertical-align: middle;"> @producto.Descripcion </td>
+           <td style ="text-align: center; vertical-align: middle;">
+                          @if(producto.Imagen != null)
+                          {
+                            <img id="Img" src="data:image/*;base64, @producto.Imagen" style="width:75px; height:75px;" />
+
+                         }else{
+                        
+                           <img id="Img" src="~/Imagen/SinProducto.jpg" class="card-img.top" style="width:75px; height:75px;" />
+                           
+                         }  
+                       </td> *@
+                  
+        <tr class="table-light" >
+            <td >Total</td>
+            <td ></td>
+            <td style ="text-align: center; vertical-align: middle;">Mucho</td>
+            <td ></td>
+            <td style ="text-align: center; vertical-align: middle;">Muchos</td>
+            <td ></td>
+        </tr>
+      </tbody>
+      
+     </table>
+     </div>
+ </div>
+
+
+}
+
+ 

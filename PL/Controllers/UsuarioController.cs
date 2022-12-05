@@ -165,11 +165,11 @@ namespace PL.Controllers
             return View(usuario);
         }
 
-        public ActionResult Delete(ML.Usuario usuario)
+        public ActionResult Delete(int idUsuario)
         {
-            ML.Result result = BL.Usuario.Delete(usuario);
+            ML.Result result = BL.Usuario.Delete(idUsuario);
 
-            if (usuario != null)
+            if (idUsuario != null)
             {
                 if (result.Correct)
                 {
