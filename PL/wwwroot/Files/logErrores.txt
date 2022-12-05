@@ -1,0 +1,8 @@
+No se insertó el Usuario con nombre: Sergio Error: Violation of UNIQUE KEY constraint 'Usuario_UserName'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (sergi0).
+The statement has been terminated.
+No se insertó el Usuario con nombre: Yaito Error: Violation of UNIQUE KEY constraint 'Usuario_UserName'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (Yaito0).
+The statement has been terminated.
+No se insertó el Usuario con nombre: Sarumi Error: Violation of UNIQUE KEY constraint 'Usuario_UserName'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (Sarumii).
+The statement has been terminated.
+No se insertó el Usuario con nombre: Haru Error: Violation of UNIQUE KEY constraint 'Usuario_UserName'. Cannot insert duplicate key in object 'dbo.Usuario'. The duplicate key value is (haaru10).
+The statement has been terminated.

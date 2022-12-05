@@ -1,0 +1,108 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2> Formulario </h2>
+    <div class="row">
+        <div class="col-md-12">
+<div class="col-md-12">
+
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="container">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.IdProducto, new { @class = "hidden" })
+                            @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden form-control" })
+                            @Html.ValidationMessageFor(model => model.IdProducto)  
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                     @Html.LabelFor(model => model.Nombre)
+                     @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                     @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+   
+                <div class="col">                    
+                      @Html.LabelFor(model => model.PrecioUnitario)
+                      @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control" })
+                      @Html.ValidationMessageFor(model => model.PrecioUnitario)                
+                </div>
+    
+                <div class="col">                   
+                      @Html.LabelFor(model => model.Stock)
+                      @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
+                      @Html.ValidationMessageFor(model => model.Stock)               
+                </div>
+              </div>
+            </div>
+            
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                    @Html.LabelFor(model => model.Proveedor.IdProveedor)
+                    @Html.TextBoxFor(model => model.Proveedor.IdProveedor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.Proveedor.Nombre)
+                    @Html.TextBoxFor(model => model.Proveedor.Nombre, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Proveedor.Nombre)
+                    </div>                    
+              </div>
+            </div>
+
+            <div class="container">
+
+              <div class="row">
+                <div class="col">
+                    @Html.LabelFor(model => model.Departamento.Area.IdArea)
+                    @Html.TextBoxFor(model => model.Departamento.Area.IdArea, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
+                </div>
+                <div class="col">
+                        @Html.LabelFor(model => model.Departamento.Area.Nombre)
+                        @Html.TextBoxFor(model => model.Departamento.Area.Nombre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Departamento.Area.Nombre)
+                    </div>    
+                    <div class="col">
+                        @Html.LabelFor(model => model.Descripcion)
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+              </div>
+            </div>
+       
+             
+             <div class="container">
+                 <div class="offset-3">
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+                    </div>      
+                    </div>      
+             </div>      
+            }
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model ML.Departamento
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center"> Departamentos </h1>
+
+<div class="container center-block">
+
+        <div class="row">
+            <div class="col-auto ms-auto">
+                @Html.ActionLink("Agregar +", "Form", "Departamento", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-responsive" id="tblDepartamento">
+                <thead>
+                    <tr>
+                        <th> Editar </th>
+
+                        <th style="display:none;"> IdDepartamento </th>
+
+                        <th> Nombre  </th>
+
+                        <td style="display:none;"> IdArea </td>
+
+                        <th> Area </th>                      
+
+                        <th> Eliminar </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Departamento departamento in Model.Departamentos)
+                    {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Producto", new { IdDepartamento = departamento.IdDepartamento})"> <i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                        
+                        <td style="display :none;"> @departamento.IdDepartamento </td>
+
+                        <td> @departamento.Nombre </td>
+
+                        <td style="display:none;"> @departamento.Area.IdArea </td>
+                    
+                        <td> @departamento.Area.Nombre </td>
+                                        
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { IdDepartamento = departamento.IdDepartamento})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"> <i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @section Scripts
+{
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tblDepartamento').DataTable({
+            searching: false,
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            autoWidth: false,
+            columnDefs: [
+                {
+                    targets: ['_all'],
+                    className: 'mdc-data-table__cell',
+                },
+            ],
+            language: {
+                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+            },
+         });
+    });
+</script>
+
+}
