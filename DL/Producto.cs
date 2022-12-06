@@ -29,4 +29,5 @@ public partial class Producto
     public string NombreDepartamento{ get; set; }
     public int IdArea { get; set; }
     public string NombreArea{ get; set; }
+    public string Imagen { get; set; }
 }

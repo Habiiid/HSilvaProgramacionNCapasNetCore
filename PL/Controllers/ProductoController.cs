@@ -54,24 +54,53 @@ namespace PL.Controllers
         }
 
         [HttpGet]//muestra las vistas
-        public ActionResult Form(int? idProducto)
+        public ActionResult Form(int? idUsuario)
         {
-            ML.Producto producto = new ML.Producto();
-            producto.Proveedor = new ML.Proveedor();
-            producto.Departamento = new ML.Departamento();
-            producto.Departamento.Area = new ML.Area();
+            ML.Usuario usuario = new ML.Usuario();
+            usuario.Rol = new ML.Rol();
+            usuario.Direccion = new ML.Direccion();
+            usuario.Direccion.Colonia = new ML.Colonia();
+            usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+            usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+            usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
 
+            ML.Result resultRol = BL.Rol.GetAll();
+            ML.Result resultPaises = BL.Pais.GetAll();
 
-            // ML.Result resultRol = BL.Rol.GetAll();
-            // ML.Result resultPaises = BL.Pais.GetAll();
-
-            if (idProducto == null)
+            if (idUsuario == null)
             {
-                //usuario.Rol.Roles = resultRol.Objects;
-                //usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
-                return View(producto);
+                usuario.Rol.Roles = resultRol.Objects;
+                usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
+                return View(usuario);
             }
-            return View(producto);
+            else
+            {
+                //GetById
+                ML.Result result = BL.Usuario.GetById(idUsuario.Value);
+
+                if (result.Correct)
+                {
+                    usuario = (ML.Usuario)result.Object;
+
+                    usuario.Rol.Roles = resultRol.Objects;
+
+                    usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
+
+                    ML.Result resultEstados = BL.Estado.GetByIdPais(usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais);
+                    usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstados.Objects;
+
+                    ML.Result resultMunicipios = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
+                    usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipios.Objects;
+
+                    ML.Result resultColonias = BL.Colonia.GetbyIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
+                    usuario.Direccion.Colonia.Colonias = resultColonias.Objects;
+                }
+                else
+                {
+                    ViewBag.Message = "Ocurrio un error";
+                }
+                return View(usuario);
+            }
         }
 
         [HttpPost]
@@ -97,7 +126,7 @@ namespace PL.Controllers
             else
             {
                 //Update
-                // result = BL.Usuario.Update(producto);
+                result = BL.Producto.Update(producto);
 
                 if (result.Correct)
                 {
@@ -112,6 +141,29 @@ namespace PL.Controllers
             return PartialView("Modal");
         }
 
+        public ActionResult Delete(int idProducto)
+        {
+            ML.Result result = BL.Usuario.Delete(idProducto);
+
+            if (idProducto != null)
+            {
+                if (result.Correct)
+                {
+                    ViewBag.Massage = result.Message;
+                }
+                else
+                {
+                    ViewBag.Massage = "Error: " + result.Message;
+                }
+            }
+            else
+            {
+                return Redirect("/Producto/GetAll");
+            }
+            return PartialView("Modal");
+        }
+
+        //imagen
         public static byte[] ConvertToBytes(IFormFile imagen)
         {
 

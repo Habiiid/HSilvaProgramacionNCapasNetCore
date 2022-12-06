@@ -12,7 +12,7 @@
 
             @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-            <div class="container">
+            <div class="container" style="display:none">
                 <div class="form-horizontal">
 
                     <div class="form-group">
@@ -50,7 +50,7 @@
               </div>
             </div>
             
-            <div class="container">
+           @* <div class="container">
               <div class="row">
                 <div class="col">
                     @Html.LabelFor(model => model.Proveedor.IdProveedor)
@@ -64,11 +64,11 @@
                     </div>                    
               </div>
             </div>
-
+*@
             <div class="container">
 
               <div class="row">
-                <div class="col">
+               @* <div class="col">
                     @Html.LabelFor(model => model.Departamento.Area.IdArea)
                     @Html.TextBoxFor(model => model.Departamento.Area.IdArea, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
@@ -77,7 +77,7 @@
                         @Html.LabelFor(model => model.Departamento.Area.Nombre)
                         @Html.TextBoxFor(model => model.Departamento.Area.Nombre, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Departamento.Area.Nombre)
-                    </div>    
+                    </div> *@   
                     <div class="col">
                         @Html.LabelFor(model => model.Descripcion)
                         @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
@@ -99,12 +99,12 @@
 
                   @if (Model.Imagen != null)
                   {
-                  <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:150px ; height:150px" />
+                  <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:100px ; height:100px" />
 
                   }
                   else
                   {
-                  <img id="Img" src="~/Imagen/SinProducto.jpg" style="width:150px ; height:150px" />
+                  <img id="Img" src="~/Imagen/SinProducto.jpg" style="width:100px ; height:100px" />
                   }
 
                   @Html.ValidationMessageFor(model => model.Imagen)
