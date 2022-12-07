@@ -74,6 +74,8 @@
                         <td style="display:none;"> IdRol</td>
 
                         <th> Rol </th>
+       
+                        <th> Estado </th>
                        
                         <th> Imagen </th>
 
@@ -118,6 +120,24 @@
 
                         <td> @usuario.Rol.Nombre</td>                   
                         
+                        @if (usuario.Status) 
+                              {
+                              <td style="text-align: center; vertical-align: middle;">
+                                  <div class="form-check form-switch" >
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked  onchange="ChangeStatus(@usuario.IdUsuario, this)">
+                                  </div>
+                               </td>
+                             }
+                              else
+                             {
+                                 <td style="text-align: center; vertical-align: middle;">
+                                    <div class="form-check form-switch" >
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="ChangeStatus(@usuario.IdUsuario, this);">
+                                    </div>
+                                 </td>
+                              } 
+                            
+                        
                         <td>  @if (usuario.Imagen != null)
                             {
                                 <img id="Img" src="data:image/*;base64,@usuario.Imagen" style="width:75px ; height:75px" />
@@ -126,9 +146,10 @@
                             {
                                 <img id="Img" src="~/Imagen/NoUser.jpg" style="width:75px ; height:75px" />
                             }
-                        </td>                                              
+                        </td>     
                         
-                         <td> 
+
+                        <td> 
                             @usuario.Direccion.Calle
                             @usuario.Direccion.NumeroExterior
                             @usuario.Direccion.NumeroInterior
@@ -137,9 +158,7 @@
                             @usuario.Direccion.Colonia.CodigoPostal
 
                             @usuario.Direccion.Colonia.Municipio.Nombre
-
                             @usuario.Direccion.Colonia.Municipio.Estado.Nombre
-
                             @usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre
 
                          </td>
@@ -197,6 +216,20 @@
             },
          });
     });
+
+        function ChangeStatus(idUsuario,e){
+        var status = e.checked
+         $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CambiarStatus")',
+                dataType: 'json',
+                data: {idUsuario, status},
+                success: {               },
+                error: function (ex) {
+                    alert('Failed.' + ex);
+                }
+            });
+    }
 </script>
 
 }

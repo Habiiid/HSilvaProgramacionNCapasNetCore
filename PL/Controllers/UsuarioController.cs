@@ -187,6 +187,14 @@ namespace PL.Controllers
             return PartialView("Modal");
         }
 
+        //cambio status
+        public JsonResult CambiarStatus(int idUsuario, bool status)
+        {
+            ML.Result result = BL.Usuario.ChangeStatus(idUsuario, status);
+
+            return Json(result);
+        }
+
         //imagen
 
         public static byte[] ConvertToBytes(IFormFile imagen)

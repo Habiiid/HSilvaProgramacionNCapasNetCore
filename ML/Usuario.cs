@@ -17,6 +17,8 @@ namespace ML
         public string Celular { get; set; }
         public string CURP { get; set; }
         public string Imagen { get; set; }
+
+        public bool Status { get; set; }
         public List<Object> Usuarios { get; set; } //lista de objetos 
 
 

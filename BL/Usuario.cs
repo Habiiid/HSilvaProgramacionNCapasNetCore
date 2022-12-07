@@ -249,8 +249,37 @@ namespace BL
             }//manejo de excepciones 
             return result;
         }
-    
-       
+
+        //changestatus
+        public static ML.Result ChangeStatus(int idUsuario, bool status)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.HsilvaProgramacionNcapasContext context = new DL.HsilvaProgramacionNcapasContext())
+                {
+                    var usuarios = context.Database.ExecuteSqlRaw($"UsuarioChangeStatus {idUsuario}, {status}");
+
+                    if (usuarios > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.Message = "No se ha podido realizar la consulta";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
         //carga de excel
         public static ML.Result ConvertirExceltoDataTable(string connstring) //convertir un excel en una tabla
         {
